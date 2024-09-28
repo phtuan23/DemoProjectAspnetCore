@@ -1,8 +1,6 @@
-﻿using DemoProject.EntityFrameworkCore.Models;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.EntityFrameworkCore;
 
-namespace DemoProject.EntityFrameworkCore
+namespace DemoProject.WebApi.Models
 {
     public class AppDbContext : DbContext
     {

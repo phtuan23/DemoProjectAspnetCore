@@ -1,4 +1,4 @@
-using DemoProject.EntityFrameworkCore;
+using DemoProject.WebApi.Models;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,7 +13,10 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(option =>
 {
     option.UseMySql(ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection")));
+    option.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"), ServerVersion.Parse("8.0.2"));
 });
+
+builder.Services.AddScoped<DbContext, AppDbContext>();
 
 var app = builder.Build();
 
