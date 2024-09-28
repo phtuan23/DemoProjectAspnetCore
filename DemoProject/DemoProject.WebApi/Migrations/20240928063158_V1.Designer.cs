@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DemoProject.WebApi.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240928060115_V1")]
+    [Migration("20240928063158_V1")]
     partial class V1
     {
         /// <inheritdoc />
@@ -46,6 +46,40 @@ namespace DemoProject.WebApi.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Product");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "33aa75b9-e581-4d5a-8904-8c131143fbf3",
+                            Description = "New Product 1",
+                            Name = "Product 1",
+                            Price = 100000f,
+                            Quantity = 100
+                        },
+                        new
+                        {
+                            Id = "83764b22-8da9-4ffe-a5df-14d3fe8fc558",
+                            Description = "New Product 2",
+                            Name = "Product 2",
+                            Price = 200000f,
+                            Quantity = 100
+                        },
+                        new
+                        {
+                            Id = "1fc0f571-ee95-46e2-ba61-483dc5355620",
+                            Description = "New Product 3",
+                            Name = "Product 3",
+                            Price = 300000f,
+                            Quantity = 100
+                        },
+                        new
+                        {
+                            Id = "59ace14e-85c0-487b-a890-4d8fe98d5e53",
+                            Description = "New Product 4",
+                            Name = "Product 4",
+                            Price = 400000f,
+                            Quantity = 100
+                        });
                 });
 
             modelBuilder.Entity("DemoProject.WebApi.Models.User", b =>
@@ -72,6 +106,24 @@ namespace DemoProject.WebApi.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("User");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "6c24e5a8-cad1-4558-bace-c204b701b790",
+                            Email = "tuan@gmail.com",
+                            Name = "Pham Anh Tuan",
+                            Password = "AMISs1kIjZiwCnrrVC0uoz/T7DL4vVIvzzy9cGdFKb4xBxh1RuY0h8cx4E4fOBIATg==",
+                            Role = "Admin"
+                        },
+                        new
+                        {
+                            Id = "56b6560c-be94-4f04-8996-9080897ecd8f",
+                            Email = "dung@gmail.com",
+                            Name = "Nguyen Van Dung",
+                            Password = "AGO1vz3tWm2AHmep8mEJnakjld4FRxdl+VvuFERJfXkjv1H4ZtBoPWa26XyaRcnkOg==",
+                            Role = "User"
+                        });
                 });
 #pragma warning restore 612, 618
         }

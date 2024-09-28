@@ -1,4 +1,11 @@
+using AutoMapper;
+using DemoProject.WebApi.Dtos.ProductDto;
+using DemoProject.WebApi.Dtos.UserDto;
 using DemoProject.WebApi.Models;
+using DemoProject.WebApi.Repositories.ProductRepository;
+using DemoProject.WebApi.Services.AutoMapper;
+using DemoProject.WebApi.Services.PasswordHasher;
+using DemoProject.WebApi.Services.ProductService;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,7 +23,21 @@ builder.Services.AddDbContext<AppDbContext>(option =>
     option.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"), ServerVersion.Parse("8.0.2"));
 });
 
-builder.Services.AddScoped<DbContext, AppDbContext>();
+var mappingConfig = new MapperConfiguration(mc =>
+{
+    mc.AllowNullCollections = true;
+    mc.AddGlobalIgnore("Item");
+    mc.AddProfile(new AutoMapperProfile());
+});
+
+var mapper = mappingConfig.CreateMapper();
+
+builder.Services.AddSingleton(mapper);
+
+builder.Services.AddTransient<DbContext, AppDbContext>();
+builder.Services.AddTransient<IProductRepository, ProductRepository>();
+builder.Services.AddTransient<IProductService, ProductService>();
+
 
 var app = builder.Build();
 
